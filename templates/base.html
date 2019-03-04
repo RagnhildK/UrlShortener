@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <input id="url_input">
+    <input type="submit" value="trykk her" onclick="getShortUrl()">
+    <div id="output"></div>
+
+    <script>
+        function getShortUrl() {
+            fetch('url', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({"longUrl": document.getElementById("url_input").value})
+            })
+                .then(response => response.json())
+                .then(data => document.getElementById("output").innerHTML = data['shortUrl']);
+        }
+    </script>
+</body>
+</html>
